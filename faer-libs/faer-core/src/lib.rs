@@ -10033,6 +10033,28 @@ impl<E: Entity> Clone for Mat<E> {
     }
 }
 
+impl<E: Entity> Clone for Col<E> {
+    fn clone(&self) -> Self {
+        let this = self.as_ref();
+        unsafe {
+            Self::from_fn(self.nrows(), |i| {
+                E::faer_from_units(E::faer_deref(this.get_unchecked(i)))
+            })
+        }
+    }
+}
+
+impl<E: Entity> Clone for Row<E> {
+    fn clone(&self) -> Self {
+        let this = self.as_ref();
+        unsafe {
+            Self::from_fn(self.ncols(), |j| {
+                E::faer_from_units(E::faer_deref(this.get_unchecked(j)))
+            })
+        }
+    }
+}
+
 impl<T> MatUnit<T> {
     #[cold]
     fn do_reserve_exact(&mut self, mut new_row_capacity: usize, mut new_col_capacity: usize) {
