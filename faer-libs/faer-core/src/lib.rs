@@ -12379,6 +12379,18 @@ impl<'a, E: Entity> Debug for MatMut<'a, E> {
     }
 }
 
+impl<E: Entity> Debug for Row<E> {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        self.as_ref().fmt(f)
+    }
+}
+
+impl<E: Entity> Debug for Col<E> {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        self.as_ref().fmt(f)
+    }
+}
+
 impl<E: Entity> Debug for Mat<E> {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         self.as_ref().fmt(f)
