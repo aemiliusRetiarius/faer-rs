@@ -11072,7 +11072,7 @@ impl<E: Entity> Row<E> {
         fn implementation<E: Entity>(this: &mut Row<E>, other: RowRef<'_, E>) {
             let mut mat = Row::<E>::new();
             mat.resize_with(
-                other.nrows(),
+                other.ncols(),
                 #[inline(always)]
                 |row| unsafe { other.read_unchecked(row) },
             );
